@@ -1,19 +1,56 @@
-# back-bsale
+# Besale Front - Prueba
 
-![analytics image (flat)](https://raw.githubusercontent.com/vitr/google-analytics-beacon/master/static/badge-flat.gif)
-![analytics](https://www.google-analytics.com/collect?v=1&cid=555&t=pageview&ec=repo&ea=open&dp=/Plantilla-de-repositorio/readme&dt=&tid=UA-4677001-16)
-
-## Plantilla de Documentación de Soporte y Uso del frontsale - README.md
-
-## Front-end app Bsale 👇
+El siguiente documento tiene el proposito de explicar el codigo y como se interactua con la pagina
 
 
-*En este pequeño readme aprenderemos un poco de como funciona la app
+## Autor
 
-## Estructura de la app:
----
+- [@felipearavena98](https://github.com/felipearavena98)
 
-- [css](#css)
-- [img](#img)
-- [js](#js)
-- [index.html](#index.html)
+
+
+## API Reference
+
+#### Enpoint para obtener todos los datos de productos
+
+```http
+  GET /allproduct
+```
+
+| Type     | Description                                  |
+| :------- | :--------------------------------------------|
+| `string` | https://backsale.herokuapp.com/allproduct    |
+
+#### Que obtendremos al ejecutar lo anterior
+###### Un ejemplo del objeto que obtendremos
+
+```json
+    {
+        "id": 5,
+        "name": "ENERGETICA MR BIG",
+        "url_image": "https://dojiw2m9tvv09.cloudfront.net/11132/product/misterbig3308256.jpg",
+        "price": 1490,
+        "discount": 20,
+        "category": 1
+    }
+```
+
+#### Enpoint para obtener todos los datos de las categorias
+
+```http
+  GET /category
+```
+
+| Type     | Description                                |
+| :------- | :------------------------------------------|
+| `string` | https://backsale.herokuapp.com/category    |
+
+#### Que obtendremos al ejecutar lo anterior
+###### Un ejemplo del objeto que obtendremos
+
+```json
+    {
+        "id": 1,
+        "name": "bebida energetica"
+    }
+```
