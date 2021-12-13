@@ -1,17 +1,88 @@
-# Besale Front - Prueba
+# Besale Backend - Prueba
 
-El siguiente documento tiene el proposito de explicar el codigo y como se interactua con la pagina
-
-
+El siguiente documento tiene el propósito de explicar el funcionamiento del backend.
 ## Autor
 
 - [@felipearavena98](https://github.com/felipearavena98)
 
 
 
+## Estructura
+El backend fue desarrollado en nodejs.
+![App Screenshot](https://github.com/felipearavena98/imagenes/blob/main/img-proyecto-bsale/parte1BACK.png?raw=true)
+- db: En esta carpeta se encuentra la función que realiza la conexión a la base de datos.
+- routes: En esta carpeta se encuentra la configuración de las rutas y los respectivos filtros para la base de datos que levantan la api.
+- index: contiene las configuraciones principales para levantar el backend.
+
+## Configuraciones
+Esta es la función que representa a la conexión de la base de datos, la cual nos permite acceder a los productos y categorías, los que posteriormente servirán para desarrollar las consultas y armar la API.
+### Conexion a base de datos
+```javascript
+const mysql = require('mysql');
+
+const pool  = mysql.createPool({
+  connectionLimit : 10,
+  host            : 'mdb-test.c6vunyturrl6.us-west-1.rds.amazonaws.com',
+  user            : 'bsale_test',
+  password        : 'bsale_test',
+  database        : 'bsale_test',
+});
+
+
+module.exports = pool;
+```
+
+
+### Endpoint de productos
+En este Endpoint realizamos la conexión a la base de datos y le decimos que queremos obtener todos los productos que se encuentren en la categoría.
+ 
+También podemos configurar o establecer la ruta que queremos darle a la API.
+
+```javascript
+    router.get('/allproduct', (req, res) =>{
+        pool.getConnection(function(err, connection) {
+            connection.query( 'SELECT * FROM product', function(err, rows) {
+              if(!err) {
+                console.log(pool._freeConnections.indexOf(connection)); // -1
+                connection.release();
+                res.json(rows);
+              } else {
+                connection.release();        
+                console.log(pool._freeConnections.indexOf(connection)); // 0
+              }
+        
+           });
+        });
+    })
+
+```
+
+
+### Endpoint de categorias
+En este Endpoint realizamos la conexión a la base de datos y le decimos que queremos obtener todos los productos que se encuentren en las categorías.
+ 
+También podemos configurar o establecer la ruta que queremos darle a la API.
+
+```javascript
+    router.get('/category', (req, res) =>{
+        pool.getConnection(function(err, connection) {
+            connection.query( 'SELECT * FROM category', function(err, rows) {
+              if(!err) {
+                console.log(pool._freeConnections.indexOf(connection)); // -1
+                connection.release();
+                res.json(rows);
+              } else {
+                connection.release();        
+                console.log(pool._freeConnections.indexOf(connection)); // 0
+              }
+        
+           });
+        });
+    })
+```
 ## API Reference
 
-#### Enpoint para obtener todos los datos de productos
+#### Endpoint para obtener todos los datos de productos
 
 ```http
   GET /allproduct
