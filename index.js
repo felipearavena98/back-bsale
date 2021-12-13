@@ -9,4 +9,6 @@ app.use(cors({origin: '*'}));
 app.use('/', routes());
 
 // Puerto
-app.listen(5000);
+app.listen( process.env.PORT, () => {
+    console.log(`Servidor corriendo en puerto ${ process.env.PORT }`);
+});
