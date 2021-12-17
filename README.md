@@ -104,7 +104,7 @@ También podemos configurar o establecer la ruta que queremos darle a la API.
 #### Endpoint para obtener todos los datos de productos
 
 ```http
-  GET /allproduct
+  GET /allproduct?page=${numeroPagina}
 ```
 
 | Type     | Description                                  |
@@ -289,7 +289,7 @@ También podemos configurar o establecer la ruta que queremos darle a la API.
 #### Enpoint para filtrar productos
 
 ```http
-  GET /category
+  GET /producto/${texto} 
 ```
 
 | Type     | Description                                |
